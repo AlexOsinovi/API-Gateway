@@ -9,11 +9,11 @@ public class WebClientConfig {
 
     @Bean
     public WebClient userWebClient(WebClient.Builder webClientBuilder) {
-        return webClientBuilder.baseUrl("http://user-service:8080/api/users").build();
+        return webClientBuilder.baseUrl("http://localhost:8080").build();
     }
 
     @Bean
     public WebClient authWebClient(WebClient.Builder webClientBuilder) {
-        return webClientBuilder.baseUrl("http://authentication-service:8081/auth").build();
+        return webClientBuilder.baseUrl("http://localhost:8081").build();
     }
 }

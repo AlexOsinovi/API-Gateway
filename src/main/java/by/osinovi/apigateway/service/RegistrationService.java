@@ -33,6 +33,7 @@ public class RegistrationService {
 
         UserRequest userDto = new UserRequest(req.getName(), req.getSurname(), req.getBirthDate(), req.getEmail());
         return userWebClient.post()
+                .uri("api/users")
                 .bodyValue(userDto)
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, resp -> Mono.error(new RuntimeException("User Service failed: " + resp.statusCode())))
@@ -42,14 +43,14 @@ public class RegistrationService {
 
                     AuthRequest authDto = new AuthRequest(req.getEmail(), req.getPassword());
                     return authWebClient.post()
-                            .uri("/register")
+                            .uri("auth/register")
                             .body(BodyInserters.fromValue(authDto))
                             .retrieve()
                             .onStatus(HttpStatusCode::isError, resp -> Mono.error(new RuntimeException("Auth Service failed: " + resp.statusCode())))
                             .bodyToMono(String.class)
                             .then(ServerResponse.ok().bodyValue("Registration successful"))
                             .onErrorResume(e -> userWebClient.delete()
-                                    .uri("/{id}", userId)
+                                    .uri("api/users/{id}", userId)
                                     .retrieve()
                                     .bodyToMono(Void.class)
                                     .then(Mono.error(new RuntimeException("Registration failed with rollback: " + e.getMessage()))));

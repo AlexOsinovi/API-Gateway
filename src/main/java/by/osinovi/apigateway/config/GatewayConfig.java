@@ -13,14 +13,11 @@ public class GatewayConfig {
     public RouteLocator routeLocator(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("auth-service", r -> r.path("/auth/**")
-                        .filters(f -> f.stripPrefix(1))
-                        .uri("http://authentication-service:8081"))
-                .route("user-service", r -> r.path("/api/users/**,/api/cards/**")
-                        .filters(f -> f.stripPrefix(2))
-                        .uri("http://user-service:8080"))
-                .route("order-service", r -> r.path("/api/orders/**,/api/items/**,/api/order-items/**")
-                        .filters(f -> f.stripPrefix(2))
-                        .uri("http://order-service:8082"))
+                        .uri("http://localhost:8081"))
+                .route("user-service", r -> r.path("/api/users/**").or().path("/api/cards/**")
+                        .uri("http://localhost:8080"))
+                .route("order-service", r -> r.path("/api/orders/**").or().path("/api/items/**").or().path("/api/order-items/**")
+                        .uri("http://localhost:8082"))
                 .build();
     }
 
