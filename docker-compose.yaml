@@ -179,7 +179,6 @@ services:
       AUTH_SERVICE_URL: ${AUTH_SERVICE_URL}
       USER_SERVICE_URL: ${USER_SERVICE_URL}
       ORDER_SERVICE_URL: ${ORDER_SERVICE_URL}
-      PAYMENT_SERVICE_URL: ${PAYMENT_SERVICE_URL}
       SPRING_BOOT_DEBUG: true
     depends_on:
       - auth-service
