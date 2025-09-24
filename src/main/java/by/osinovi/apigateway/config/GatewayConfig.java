@@ -19,9 +19,6 @@ public class GatewayConfig {
     @Value("${order.service.url}")
     private String orderServiceUrl;
 
-    @Value("${payment.service.url}")
-    private String paymentServiceUrl;
-
     @Bean
     public RouteLocator routeLocator(RouteLocatorBuilder builder) {
         return builder.routes()
