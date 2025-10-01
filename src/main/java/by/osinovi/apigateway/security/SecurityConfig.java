@@ -27,7 +27,7 @@ public class SecurityConfig {
         http.addFilterAt(jwtValidationFilter(),SecurityWebFiltersOrder.AUTHENTICATION);
         http.authorizeExchange(exchange -> {
             exchange
-                    .pathMatchers("/auth/login", "/auth/register", "/auth/refresh-token", "/auth/validate-token","/actuator/health/*").permitAll()
+                    .pathMatchers("/auth/login", "/auth/register", "/auth/refresh-token", "/auth/validate-token","/actuator/health/**").permitAll()
                     .anyExchange().authenticated();
         });
         return http.build();
