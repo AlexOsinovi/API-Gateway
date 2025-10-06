@@ -56,7 +56,8 @@ public class JwtValidationFilter implements WebFilter {
         if (path.startsWith("/auth/login") ||
                 path.startsWith("/auth/register") ||
                 path.startsWith("/auth/refresh-token") ||
-                path.startsWith("/auth/validate-token")) {
+                path.startsWith("/auth/validate-token") ||
+                path.startsWith("/actuator/health")) {
             logger.info("Skipping JWT validation for path: {}, RequestId: {}", path, requestId);
             return chain.filter(exchange);
         }
