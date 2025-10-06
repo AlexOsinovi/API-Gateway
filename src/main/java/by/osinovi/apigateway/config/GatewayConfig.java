@@ -19,9 +19,6 @@ public class GatewayConfig {
     @Value("${order.service.url}")
     private String orderServiceUrl;
 
-    @Value("${payment.service.url}")
-    private String paymentServiceUrl;
-
     @Bean
     public RouteLocator routeLocator(RouteLocatorBuilder builder) {
         return builder.routes()
@@ -31,8 +28,6 @@ public class GatewayConfig {
                         .uri(userServiceUrl))
                 .route("order-service", r -> r.path("/api/orders/**").or().path("/api/items/**").or().path("/api/order-items/**")
                         .uri(orderServiceUrl))
-                .route("payment-service", r -> r.path("/api/payments/**")
-                .uri(paymentServiceUrl))
                 .build();
 
     }
